@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { useSelector } from 'react-redux'
 import tw from 'tailwind-react-native-classnames'
 import { selectTravelTimeInformation } from '../slices/navSlice'
@@ -44,7 +43,7 @@ const RideOptionsCard = () => {
                 <TouchableOpacity onPress={() => navigation.navigate("NavigateCard")} style={tw`absolute top-3 left-5 z-50 p-3 rounded-full`}>
                     <Icon name="chevron-left" type="fontawesome"/>
                 </TouchableOpacity>
-                <Text style={tw`text-center py-5 text-xl`}>Select a Ride - {travelTimeInformation?.distance.text}</Text>
+                <Text style={tw`text-center py-5 text-xl`}>Select a Ride - {travelTimeInformation?.distance?.text}</Text>
             </View>
             <FlatList 
                 data={data}
@@ -64,7 +63,7 @@ const RideOptionsCard = () => {
                         />
                         <View styles={tw`-ml-6`}>
                             <Text styles={tw`text-xl font-semibold`}>{title}</Text>
-                            <Text>Travel Time {travelTimeInformation?.duration.text}</Text>
+                            <Text>Travel Time {travelTimeInformation?.duration?.text}</Text>
                         </View>
                         <Text style={tw `text-xl`}>
                             {new Intl.NumberFormat('en-gb', {
@@ -77,7 +76,7 @@ const RideOptionsCard = () => {
                     </TouchableOpacity>
                 )}
             />
-            <View>
+            <View style={tw`mt-auto border-t border-gray-200`}>
                 <TouchableOpacity disabled={!selected} style={tw`bg-black m-3 ${!selected && "bg-gray-300 "}`}>
                     <Text style={tw `text-center text-white text-xl`}>
                         Choose {selected?.title}
